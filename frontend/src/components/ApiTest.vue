@@ -1,7 +1,15 @@
 <script>
 export default {
   data: () => ({
-    apiResponse: null
+    apiResponsive: null,
+    striped: true,
+    bordered: true,
+    borderless: true,
+    outlined: true,
+    noCollapse: true,
+    fields: ['id', 'name', 'email', 'latitude', 'longitude'],
+    headVariant: 'light',
+    tableVariant: 'light'
   }),
 
   created() {
@@ -11,21 +19,29 @@ export default {
   methods: {
     async fetchData() {
       const url = 'http://localhost/'
-      this.apiResponse = await (await fetch(url)).json()
+      this.apiResponsive = await (await fetch(url)).json()
     }
   }
 }
 </script>
 
 <template>
-  <div v-if="!apiResponse">
-    Pinging the api...
+  <div v-if="!apiResponsive">
   </div>
 
-  <div v-if="apiResponse">
-    The api responded with: <br />
-    <code>
-    {{ apiResponse }}
-    </code>
+  <div v-if="apiResponsive">
+    Users Information: <br />
+    <b-table
+      :striped="striped"
+      :bordered="bordered"
+      :borderless="borderless"
+      :outlined="outlined"
+      :no-border-collapse="noCollapse"
+      :items="apiResponsive.users"
+      :fields="fields"
+      :head-variant="headVariant"
+      :table-variant="tableVariant"
+    ></b-table>
+
   </div>
 </template>
