@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
+            $table->longText('weather')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
